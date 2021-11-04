@@ -28,17 +28,17 @@ const TodoForm = ({addNewToDo, toDoForEdit, setToDoForEdit, updateToDo}) => {
     e.preventDefault();
     
     if(title.trim().length < 3 && content.trim().length < 3){
-      setError('Title and content for the new task are required');
+      setError('Title and content for the task are required');
       return;
     }
 
     if(title.trim().length < 3){
-      setError('Title for the new task is required');
+      setError('Title for the task is required');
       return;
     }
 
     if(content.trim().length < 3){
-      setError('Content for the new task is required');
+      setError('Content for the task is required');
       return;
     }
 
@@ -48,10 +48,10 @@ const TodoForm = ({addNewToDo, toDoForEdit, setToDoForEdit, updateToDo}) => {
         title,
         content
       });
-      setSuccessMessage('New task successfully updated');
+      setSuccessMessage('The task has been successfully updated');
     } else {
       addToDo();
-      setSuccessMessage('New task successfully added');
+      setSuccessMessage('The new task has been successfully added');
     }
 
     setFormValues({title:'', content:''});
@@ -91,19 +91,19 @@ const TodoForm = ({addNewToDo, toDoForEdit, setToDoForEdit, updateToDo}) => {
             value={content}
             onChange={handleInputChange}
           />
-          <input type="submit" className="btn btn-primary m-3" value={toDoForEdit ? 'Update Task' : 'Input new task'} />          
+          <input type="submit" className="btn btn-primary form-control m-3" value={toDoForEdit ? 'Update Task' : 'Input new task'} />          
         </form>
         
-        {toDoForEdit && <button className="btn btn-warning m-3 mt-0" onClick={() => setToDoForEdit(null)}>Finish updating</button>}
+        {toDoForEdit && <button className="btn btn-warning form-control m-3 mt-0" onClick={() => setToDoForEdit(null)}>Finish updating</button>}
         
         {error && 
-          <div className="alert alert-danger m-3">
+          <div className="alert alert-danger form-control m-3">
             {error}
           </div>
         }
 
         {successMessage && 
-          <div className="alert alert-success m-3">
+          <div className="alert alert-success form-control m-3 text-center">
             {successMessage}
           </div>
         }

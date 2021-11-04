@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Footer } from './components/Footer';
 import  TodoForm  from './components/TodoForm';
 import  TodoList  from './components/TodoList';
 
@@ -70,15 +71,18 @@ const App = () => {
   }
 
   return (
-    <div className="container my-2">
-      <div className="row">
-        <div className="col-8">
-          <TodoList toDoList={toDoList} deleteToDo={deleteToDo} toggleComplete= {toggleComplete} setToDoForEdit={setToDoForEdit}/>
-        </div>
-        <div className="col-4">
-          <TodoForm addNewToDo={addNewToDo} toDoForEdit={toDoForEdit} setToDoForEdit={setToDoForEdit} updateToDo={updateToDo}/>
+    <div>
+      <div className="container my-2">
+        <div className="row">
+          <div className="col-8">
+            <TodoList toDoList={toDoList} deleteToDo={deleteToDo} toggleComplete= {toggleComplete} setToDoForEdit={setToDoForEdit}/>
+          </div>
+          <div className="col-4">
+            <TodoForm addNewToDo={addNewToDo} toDoForEdit={toDoForEdit} setToDoForEdit={setToDoForEdit} updateToDo={updateToDo}/>
+          </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -3,14 +3,14 @@ import React from 'react'
 const ToDo = ({toDo, deleteToDo, toggleComplete, setToDoForEdit}) => {
 
     return (
-        <div className="card mt-4">
+        <div className="card mb-4">
             <div className="card-body">
                 <h3 className={`card-title ${toDo.completed && 'task-completed'}`} >{toDo.title}</h3>
                 <p className="card-text">
                 {toDo.content}   
                 </p>    
                 <hr />
-                <div className="d-flex justify-content-center">
+                <div>
                     <button className="btn btn-success m-3" onClick={() => toggleComplete(toDo.id)}>
                         {toDo.completed ? 'Set as not completed' : 'Set as completed'}
                     </button>
