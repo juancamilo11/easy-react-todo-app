@@ -59,14 +59,18 @@ const App = () => {
     setToDoList(newToDoList);
   }
 
+  const addNewToDo = (toDo) => {
+    setToDoList([toDo, ...toDoList]);
+  }
+
   return (
     <div className="container my-2">
       <div className="row">
-        <div className="col-6">
+        <div className="col-8">
           <TodoList toDoList={toDoList} deleteToDo={deleteToDo} toggleComplete= {toggleComplete}/>
         </div>
-        <div className="col-6">
-          <TodoForm />
+        <div className="col-4">
+          <TodoForm addNewToDo={addNewToDo}/>
         </div>
       </div>
     </div>
