@@ -1,25 +1,7 @@
 import React from 'react'
 import ToDo from './ToDo'
 
-const toDoList = [{
-        id:'1',
-        title:'todo1',
-        content:'Contenido del todo 1',
-        completed:false
-    },{
-        id:'2',
-        title:'todo2',
-        content:'Contenido del todo 2',
-        completed:true
-    },{
-        id:'3',
-        title:'todo3',
-        content:'Contenido del todo 3',
-        completed:true
-    }
-];
-
-const TodoList = () => {
+const TodoList = ({toDoList}) => {
     return (
         <div>
             <h1 className="text-center my-4">My Todo List</h1>
