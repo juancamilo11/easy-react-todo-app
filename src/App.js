@@ -34,16 +34,27 @@ const App = () => {
 
   const toggleComplete = (toDoId) => {
     
-    const newToDoList = toDoList.map(toDo => {
-      if(toDo.id === toDoId) {
-        return {
-          ...toDo,
-          completed:!toDo.completed
-        }
-      } else {
-        return toDo;
-      }
-    });
+    //FORMA 1
+    // const newToDoList = toDoList.map(toDo => {
+    //   if(toDo.id === toDoId) {
+    //     return {
+    //       ...toDo,
+    //       completed:!toDo.completed
+    //     }
+    //   } else {
+    //     return toDo;
+    //   }
+    // });
+
+    //FORMA 2
+    // const newToDoList = toDoList.map(toDo => (
+    //   toDo.id === toDoId 
+    //   ? { ...toDo, completed: !toDo.completed }
+    //   : toDo
+    // ));
+
+    //FORMA 3
+    const newToDoList = toDoList.map(toDo => toDo.id === toDoId ? {...toDo, completed:!toDo.completed} : toDo);
 
     setToDoList(newToDoList);
   }
