@@ -4,6 +4,8 @@ const TodoForm = ({addNewToDo}) => {
 
   const [formValues, setFormValues] = useState({title:'', content:''});
   const [error, setError] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(false);
+
   const {title, content} = formValues;
 
   const handleInputChange = (e) => {
@@ -16,24 +18,43 @@ const TodoForm = ({addNewToDo}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    if(title.length >=3 && content.length >=3) {
-      const newToDo = {
-        id: Date.now(),
-        title,
-        content,
-        completed:false
-      }
-      addNewToDo(newToDo);
-      setFormValues({title:'', content:''});
-      setError(null);
-    } else {
+    if(title.trim().length < 3 && content.trim().length < 3){
       setError('Title and content for the new task are required');
+      return;
     }
+
+    if(title.trim().length < 3){
+      setError('Title for the new task is required');
+      return;
+    }
+
+    if(content.trim().length < 3){
+      setError('Content for the new task is required');
+      return;
+    }
+
+
+    const newToDo = {
+      id: Date.now(),
+      title,
+      content,
+      completed:false
+    }
+
+    addNewToDo(newToDo);
+    setFormValues({title:'', content:''});
+    setSuccessMessage('New task successfully added');
+  
+    setTimeout(()=> {
+      setSuccessMessage(false);
+    },3000);
+
+    setError(null);
   }
 
   return (
     <div className="container">
-      <h2 className="text-center my-4">TodoForm</h2>  
+      <h2 className="text-center my-4">New Task Form</h2>  
         <form onSubmit={handleSubmit}>
           <input 
             type="text" 
@@ -53,12 +74,19 @@ const TodoForm = ({addNewToDo}) => {
           />
           <input type="submit" className="btn btn-primary m-3" value="Input new task" />
         </form>
+        
         {error && 
           <div className="alert alert-danger m-3">
             {error}
           </div>
         }
-        
+
+        {successMessage && 
+          <div className="alert alert-success m-3">
+            {successMessage}
+          </div>
+        }
+
     </div>
   )
 }
