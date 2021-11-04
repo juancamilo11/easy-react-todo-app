@@ -25,6 +25,7 @@ const initialToDoList = [{
 const App = () => {
 
   const [toDoList, setToDoList] = useState(initialToDoList);
+  const [toDoForEdit, setToDoForEdit] = useState(null);
 
   const deleteToDo = (toDoId) => {
     const newToDoList = toDoList.filter(toDo => toDo.id !== toDoId);
@@ -63,14 +64,19 @@ const App = () => {
     setToDoList([toDo, ...toDoList]);
   }
 
+  const updateToDo = (toDoUpdated) => {
+    const newToDoList = toDoList.map(toDo => toDo.id === toDoUpdated.id ? toDoUpdated : toDo);
+    setToDoList(newToDoList);
+  }
+
   return (
     <div className="container my-2">
       <div className="row">
         <div className="col-8">
-          <TodoList toDoList={toDoList} deleteToDo={deleteToDo} toggleComplete= {toggleComplete}/>
+          <TodoList toDoList={toDoList} deleteToDo={deleteToDo} toggleComplete= {toggleComplete} setToDoForEdit={setToDoForEdit}/>
         </div>
         <div className="col-4">
-          <TodoForm addNewToDo={addNewToDo}/>
+          <TodoForm addNewToDo={addNewToDo} toDoForEdit={toDoForEdit} setToDoForEdit={setToDoForEdit} updateToDo={updateToDo}/>
         </div>
       </div>
     </div>

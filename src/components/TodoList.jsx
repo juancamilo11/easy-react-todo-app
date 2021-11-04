@@ -1,7 +1,7 @@
 import React from 'react'
 import ToDo from './ToDo'
 
-const TodoList = ({toDoList, deleteToDo, toggleComplete}) => {
+const TodoList = ({toDoList, deleteToDo, toggleComplete, setToDoForEdit}) => {
     return (
         <div>
             <h1 className="text-center my-4">My Todo List</h1>
@@ -13,6 +13,7 @@ const TodoList = ({toDoList, deleteToDo, toggleComplete}) => {
                             toDo={toDo}
                             deleteToDo={deleteToDo}
                             toggleComplete={toggleComplete}
+                            setToDoForEdit={setToDoForEdit}
                         />
                     )
                 })

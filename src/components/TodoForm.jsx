@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-const TodoForm = ({addNewToDo}) => {
+const TodoForm = ({addNewToDo, toDoForEdit, setToDoForEdit, updateToDo}) => {
 
   const [formValues, setFormValues] = useState({title:'', content:''});
+  const {title, content} = formValues;
   const [error, setError] = useState(false);
   const [successMessage, setSuccessMessage] = useState(false);
-
-  const {title, content} = formValues;
 
   const handleInputChange = (e) => {
     setFormValues({
@@ -14,6 +13,16 @@ const TodoForm = ({addNewToDo}) => {
       [e.target.name]:e.target.value
     });
   };
+
+  const addToDo = () => {
+    const newToDo = {
+      id: Date.now(),
+      title,
+      content,
+      completed:false
+    }
+    addNewToDo(newToDo);
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,17 +42,19 @@ const TodoForm = ({addNewToDo}) => {
       return;
     }
 
-
-    const newToDo = {
-      id: Date.now(),
-      title,
-      content,
-      completed:false
+    if(toDoForEdit) {
+      updateToDo({
+        ...toDoForEdit,
+        title,
+        content
+      });
+      setSuccessMessage('New task successfully updated');
+    } else {
+      addToDo();
+      setSuccessMessage('New task successfully added');
     }
 
-    addNewToDo(newToDo);
     setFormValues({title:'', content:''});
-    setSuccessMessage('New task successfully added');
   
     setTimeout(()=> {
       setSuccessMessage(false);
@@ -52,9 +63,17 @@ const TodoForm = ({addNewToDo}) => {
     setError(null);
   }
 
+  useEffect(() => {
+    if(toDoForEdit) {
+      setFormValues(toDoForEdit);
+    } else {
+      setFormValues({title:'', content:''});
+    }
+  }, [toDoForEdit]);
+
   return (
     <div className="container">
-      <h2 className="text-center my-4">New Task Form</h2>  
+      <h2 className="text-center my-4">{toDoForEdit ? 'Update Task Form' : 'New Task Form' }</h2>  
         <form onSubmit={handleSubmit}>
           <input 
             type="text" 
@@ -72,8 +91,10 @@ const TodoForm = ({addNewToDo}) => {
             value={content}
             onChange={handleInputChange}
           />
-          <input type="submit" className="btn btn-primary m-3" value="Input new task" />
+          <input type="submit" className="btn btn-primary m-3" value={toDoForEdit ? 'Update Task' : 'Input new task'} />          
         </form>
+        
+        {toDoForEdit && <button className="btn btn-warning m-3 mt-0" onClick={() => setToDoForEdit(null)}>Finish updating</button>}
         
         {error && 
           <div className="alert alert-danger m-3">
