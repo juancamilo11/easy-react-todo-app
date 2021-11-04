@@ -13,7 +13,7 @@ const App = () => {
   const [toDoForEdit, setToDoForEdit] = useState(null);
 
   const deleteToDo = (toDoId) => {
-    if(toDoId === toDoForEdit.id) {
+    if(toDoId === toDoForEdit?.id) {
       window.alert('Cannot delete a task while updating it');
       return;
     }

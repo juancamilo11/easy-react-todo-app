@@ -20,7 +20,7 @@ const TodoList = ({toDoList, deleteToDo, toggleComplete, setToDoForEdit}) => {
                     })}
                 </>
             :
-            <h2 className="display-4 text-center mt-5">No tasks found, Start by creating a new one</h2>
+            <h2 className="display-4 text-center mt-5 alert alert-warning">No tasks found, Start by creating a new one...</h2>
             }
         </div>
     )
