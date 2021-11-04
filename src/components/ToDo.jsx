@@ -1,12 +1,12 @@
 import React from 'react'
 
-const ToDo = ({todo}) => {
+const ToDo = ({toDo}) => {
     return (
         <div className="card mt-4">
             <div className="card-body">
-                <h3 className="card-title">{todo.title}</h3>
+                <h3 className="card-title">{toDo.title}</h3>
                 <p className="card-text">
-                {todo.content}   
+                {toDo.content}   
                 </p>    
                 <hr />
                 <div className="d-flex justify-content-center">
