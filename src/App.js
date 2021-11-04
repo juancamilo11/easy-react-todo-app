@@ -1,34 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Footer } from './components/Footer';
 import  TodoForm  from './components/TodoForm';
 import  TodoList  from './components/TodoList';
 
-const initialToDoList = [{
-        id:'1',
-        title:'todo1',
-        content:'Contenido del todo 1',
-        completed:false
-    },{
-        id:'2',
-        title:'todo2',
-        content:'Contenido del todo 2',
-        completed:true
-    },{
-        id:'3',
-        title:'todo3',
-        content:'Contenido del todo 3',
-        completed:true
-    }
-];
-
-
+const initialToDos = () => {
+  return JSON.parse(localStorage.getItem('toDoList')) || [];
+}
 
 const App = () => {
 
-  const [toDoList, setToDoList] = useState(initialToDoList);
+  const [toDoList, setToDoList] = useState(initialToDos);
   const [toDoForEdit, setToDoForEdit] = useState(null);
 
   const deleteToDo = (toDoId) => {
+    if(toDoId === toDoForEdit.id) {
+      window.alert('Cannot delete a task while updating it');
+      return;
+    }
     const newToDoList = toDoList.filter(toDo => toDo.id !== toDoId);
     
     setToDoList(newToDoList);
@@ -69,6 +57,10 @@ const App = () => {
     const newToDoList = toDoList.map(toDo => toDo.id === toDoUpdated.id ? toDoUpdated : toDo);
     setToDoList(newToDoList);
   }
+
+  useEffect(() => {
+    localStorage.setItem('toDoList', JSON.stringify(toDoList));
+  }, [toDoList])
 
   return (
     <div>
