@@ -28,6 +28,23 @@ const App = () => {
 
   const deleteToDo = (toDoId) => {
     const newToDoList = toDoList.filter(toDo => toDo.id !== toDoId);
+    
+    setToDoList(newToDoList);
+  }
+
+  const toggleComplete = (toDoId) => {
+    
+    const newToDoList = toDoList.map(toDo => {
+      if(toDo.id === toDoId) {
+        return {
+          ...toDo,
+          completed:!toDo.completed
+        }
+      } else {
+        return toDo;
+      }
+    });
+
     setToDoList(newToDoList);
   }
 
@@ -35,7 +52,7 @@ const App = () => {
     <div className="container my-2">
       <div className="row">
         <div className="col-6">
-          <TodoList toDoList={toDoList} deleteToDo={deleteToDo}/>
+          <TodoList toDoList={toDoList} deleteToDo={deleteToDo} toggleComplete= {toggleComplete}/>
         </div>
         <div className="col-6">
           <TodoForm />
