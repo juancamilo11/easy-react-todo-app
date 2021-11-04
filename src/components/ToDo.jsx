@@ -1,6 +1,7 @@
 import React from 'react'
 
-const ToDo = ({toDo}) => {
+const ToDo = ({toDo, deleteToDo}) => {
+
     return (
         <div className="card mt-4">
             <div className="card-body">
@@ -12,7 +13,7 @@ const ToDo = ({toDo}) => {
                 <div className="d-flex justify-content-center">
                     <button className="btn btn-success m-3">Set as completed</button>
                     <button className="btn btn-primary m-3">Update</button>
-                    <button className="btn btn-danger m-3">Delete</button>
+                    <button className="btn btn-danger m-3" onClick={() => deleteToDo(toDo.id)}>Delete</button>
                 </div>
             </div>    
         </div>

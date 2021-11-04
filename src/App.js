@@ -20,15 +20,22 @@ const initialToDoList = [{
     }
 ];
 
+
+
 const App = () => {
 
   const [toDoList, setToDoList] = useState(initialToDoList);
+
+  const deleteToDo = (toDoId) => {
+    const newToDoList = toDoList.filter(toDo => toDo.id !== toDoId);
+    setToDoList(newToDoList);
+  }
 
   return (
     <div className="container my-2">
       <div className="row">
         <div className="col-6">
-          <TodoList toDoList={toDoList}/>
+          <TodoList toDoList={toDoList} deleteToDo={deleteToDo}/>
         </div>
         <div className="col-6">
           <TodoForm />
