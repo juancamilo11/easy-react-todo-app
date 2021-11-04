@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 const TodoForm = ({addNewToDo}) => {
 
   const [formValues, setFormValues] = useState({title:'', content:''});
-
+  const [error, setError] = useState(false);
   const {title, content} = formValues;
 
   const handleInputChange = (e) => {
@@ -25,8 +25,9 @@ const TodoForm = ({addNewToDo}) => {
       }
       addNewToDo(newToDo);
       setFormValues({title:'', content:''});
+      setError(null);
     } else {
-      window.alert('Title and content for the new task are required');
+      setError('Title and content for the new task are required');
     }
   }
 
@@ -52,6 +53,12 @@ const TodoForm = ({addNewToDo}) => {
           />
           <input type="submit" className="btn btn-primary m-3" value="Input new task" />
         </form>
+        {error && 
+          <div className="alert alert-danger m-3">
+            {error}
+          </div>
+        }
+        
     </div>
   )
 }

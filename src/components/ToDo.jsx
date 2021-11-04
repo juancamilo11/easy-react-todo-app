@@ -14,7 +14,7 @@ const ToDo = ({toDo, deleteToDo, toggleComplete}) => {
                     <button className="btn btn-success m-3" onClick={() => toggleComplete(toDo.id)}>
                         {toDo.completed ? 'Set as not completed' : 'Set as completed'}
                     </button>
-                    <button className="btn btn-primary m-3">Update</button>
+                    {!toDo.completed && <button className="btn btn-primary m-3">Update</button>}
                     <button className="btn btn-danger m-3" onClick={() => deleteToDo(toDo.id)}>Delete</button>
                 </div>
             </div>    
